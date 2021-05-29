@@ -11,7 +11,7 @@ let workbook = new excel.Workbook();
 
 
 app.use(bodyParser.urlencoded());
-app.post("/excelFile",(req,res)=>{
+app.get("/excelFile",(req,res)=>{
   try{
 let worksheet = workbook.addWorksheet('Sheet 1');
 let style = workbook.createStyle({
@@ -33,7 +33,7 @@ worksheet.cell(1,3).formula('A1 + B1').style(style);
 
 
 workbook.write('Excel.xlsx');
-return res.json("excel file was created at server level")
+return res.download('d:/node/Excel.xlsx');
   }
   catch(ex){
     res.status(500).json("internal server error")
