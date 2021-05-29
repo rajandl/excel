@@ -2,6 +2,10 @@ const express=require("express");
 const app=express()
 const bodyParser=require("body-parser")
 const excel = require('excel4node');
+const fs = require('fs');
+const path = require('path');
+let dirPath = __dirname;
+dirPath = dirPath.replace(/\\/gm, "/") + "/";
 
 
 
@@ -33,10 +37,11 @@ worksheet.cell(1,3).formula('A1 + B1').style(style);
 
 
 workbook.write('Excel.xlsx');
-return res.download('d:/node/Excel.xlsx');
+return res.download(dirPath+'/Excel.xlsx');
   }
   catch(ex){
-    res.status(500).json("internal server error")
+   
+    res.status(500).json("internal server error",ex)
   }
 });
 
